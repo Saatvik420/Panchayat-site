@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Village Crop Marketplace</title>
+    <link rel="stylesheet" href="marketplace.css">
+</head>
+<body>
+    <div class="container">
+        <section class="page-header">
+            <h2>Admin Dashboard</h2>
+            <p>Manage crops, fertilizers, and orders for the marketplace.</p>
+        </section>
+
+        <section class="admin-section">
+            <h3>Crop Sales Statistics</h3>
+            <div class="chart-container">
+                <canvas id="crop-sales-chart"></canvas>
+            </div>
+
+            <h3>Add New Crop</h3>
+            <form id="add-crop-form" class="admin-form">
+                <div class="form-group">
+                    <label for="crop-name">Crop Name <span class="required">*</span></label>
+                    <input type="text" id="crop-name" placeholder="Enter crop name" required>
+                </div>
+                <div class="form-group">
+                    <label for="crop-price">Price (₹) <span class="required">*</span></label>
+                    <input type="number" id="crop-price" placeholder="Enter price" required>
+                </div>
+                <div class="form-group">
+                    <label for="crop-unit">Unit <span class="required">*</span></label>
+                    <select id="crop-unit" required>
+                        <option value="Quintal">Quintal</option>
+                        <option value="Kg">Kg</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="crop-image">Image URL</label>
+                    <input type="url" id="crop-image" placeholder="Enter image URL">
+                </div>
+                <div class="form-group">
+                    <label for="crop-description">Description</label>
+                    <textarea id="crop-description" placeholder="Enter description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="crop-farmer">Farmer Name <span class="required">*</span></label>
+                    <input type="text" id="crop-farmer" placeholder="Enter farmer name" required>
+                </div>
+                <button type="submit" class="btn">Add Crop</button>
+            </form>
+
+            <h3>Add New Fertilizer</h3>
+            <form id="add-fertilizer-form" class="admin-form">
+                <div class="form-group">
+                    <label for="fertilizer-name">Fertilizer Name <span class="required">*</span></label>
+                    <input type="text" id="fertilizer-name" placeholder="Enter fertilizer name" required>
+                </div>
+                <div class="form-group">
+                    <label for="fertilizer-price">Price (₹) <span class="required">*</span></label>
+                    <input type="number" id="fertilizer-price" placeholder="Enter price" required>
+                </div>
+                <div class="form-group">
+                    <label for="fertilizer-unit">Unit <span class="required">*</span></label>
+                    <select id="fertilizer-unit" required>
+                        <option value="Kg">Kg</option>
+                        <option value="Liter">Liter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fertilizer-image">Image URL</label>
+                    <input type="url" id="fertilizer-image" placeholder="Enter image URL">
+                </div>
+                <div class="form-group">
+                    <label for="fertilizer-description">Description</label>
+                    <textarea id="fertilizer-description" placeholder="Enter description"></textarea>
+                </div>
+                <button type="submit" class="btn">Add Fertilizer</button>
+            </form>
+
+            <h3>Update Crop Prices</h3>
+            <div class="admin-table">
+                <table id="crop-prices-table">
+                    <thead>
+                        <tr>
+                            <th>Crop Name</th>
+                            <th>Price (₹)</th>
+                            <th>Farmer</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="crop-prices-body">
+                        <tr><td colspan="4">Loading crops...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Update Fertilizer Prices</h3>
+            <div class="admin-table">
+                <table id="fertilizer-prices-table">
+                    <thead>
+                        <tr>
+                            <th>Fertilizer Name</th>
+                            <th>Price (₹)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fertilizer-prices-body">
+                        <tr><td colspan="3">Loading fertilizers...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Order Details</h3>
+            <div class="admin-table">
+                <table id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer</th>
+                            <th>Items</th>
+                            <th>Total (₹)</th>
+                            <th>Farmer/Supplier</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-body">
+                        <tr><td colspan="7">Loading orders...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Village Crop Marketplace. All rights reserved.</p>
+        <p>Contact: support@villagecropmarket.com | Phone: +91 98765 43210</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="marketplace.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchayat Chief Dashboard - GramSeva</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/> -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hide content by default, JavaScript will show it upon successful login */
+        body.hidden-content #panchayat-dashboard {
+            display: none;
+        }
+    </style>
+</head>
+<body class="hidden-content">
+    <header class="header">
+        <i class="ri-bread-line logo-icon"></i>
+        <h1 class="logo">GramSeva (Panchayat)</h1>
+    </header>
+
+    <main class="container" id="panchayat-dashboard">
+        <section class="page-header">
+            <h2>Panchayat Dashboard</h2>
+            <p>Overview of village activities and quick access to management tools.</p>
+        </section>
+
+        <section class="dashboard-cards">
+            <div class="card">
+                <h3>Total Feedback</h3>
+                <p id="total-feedback">0</p>
+            </div>
+            <div class="card">
+                <h3>Unresolved Issues</h3>
+                <p id="unresolved-issues">0</p>
+            </div>
+            <div class="card">
+                <h3>Last Price Update</h3>
+                <p id="last-price-update">N/A</p>
+            </div>
+            <div class="card">
+                <h3>Total Announcements</h3>
+                <p id="total-announcements">0</p>
+            </div>
+        </section>
+
+        <section class="section-divider" id="feedback-management-section">
+            <h3>All Villager Feedback & Issues</h3>
+        </section>
+
+        <section class="feedback-management-section">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Raised By</th>
+                        <th>Subject</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Submitted On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="feedback-list-body">
+                    <tr><td colspan="7">Loading feedback data...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section-divider" id="price-update-section">
+            <h3>Manage Crop & Fertilizer Prices</h3>
+        </section>
+
+        <section class="price-update-section">
+            <h4>Today's Top Crop Prices</h4>
+            <p>Quickly update the prices for prominently displayed crops on the homepage.</p>
+            <table class="data-table editable-table" id="top-crop-prices-table">
+                <thead>
+                    <tr>
+                        <th>Crop Name</th>
+                        <th>Current Price (₹/Quintal)</th>
+                        <th>Trend</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="top-crop-prices-body">
+                    <tr><td colspan="4">Loading top crop data...</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <p>For a comprehensive list and to add/delete any crop or fertilizer, use the tables below.</p>
+
+            <h4>All Crop Prices</h4>
+            <table class="data-table editable-table">
+                <thead>
+                    <tr>
+                        <th>Crop Name</th>
+                        <th>Current Price</th>
+                        <th>Trend</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="editable-crop-prices-body">
+                    <tr><td colspan="5">Loading editable crop data...</td></tr>
+                </tbody>
+            </table>
+            <div class="add-new-item-form form-card">
+                <h4>Add New Crop</h4>
+                <div class="form-group">
+                    <label for="new-crop-name">Name:</label>
+                    <input type="text" id="new-crop-name" placeholder="e.g., Wheat" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-crop-price">Price (per Quintal/Kg):</label>
+                    <input type="number" id="new-crop-price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-crop-trend">Trend:</label>
+                    <select id="new-crop-trend">
+                        <option value="Stable">Stable</option>
+                        <option value="Up">Up</option>
+                        <option value="Down">Down</option>
+                    </select>
+                </div>
+                <button class="btn" id="add-crop-btn">Add Crop</button>
+            </div>
+
+            <h4>Fertilizer & Ingredient Prices</h4>
+            <table class="data-table editable-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="editable-fertilizer-prices-body">
+                    <tr><td colspan="5">Loading editable fertilizer data...</td></tr>
+                </tbody>
+            </table>
+            <div class="add-new-item-form form-card">
+                <h4>Add New Fertilizer/Ingredient</h4>
+                <div class="form-group">
+                    <label for="new-fertilizer-name">Name:</label>
+                    <input type="text" id="new-fertilizer-name" placeholder="e.g., Urea" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-fertilizer-unit">Unit:</label>
+                    <input type="text" id="new-fertilizer-unit" placeholder="e.g., 50kg bag" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-fertilizer-price">Price:</label>
+                    <input type="number" id="new-fertilizer-price" step="0.01" required>
+                </div>
+                <button class="btn" id="add-fertilizer-btn">Add Product</button>
+            </div>
+        </section>
+
+        <section class="section-divider" id="announcement-management-section">
+            <h3>Manage Announcements</h3>
+        </section>
+
+        <section class="announcement-management-section form-card">
+            <h4>Add New Announcement</h4>
+            <div class="form-group">
+                <label for="announcement-title">Title:</label>
+                <input type="text" id="announcement-title" placeholder="e.g., Village Meeting Notice" required>
+            </div>
+            <div class="form-group">
+                <label for="announcement-content">Content:</label>
+                <textarea id="announcement-content" rows="4" placeholder="Details of the announcement" required></textarea>
+            </div>
+            <button class="btn" id="add-announcement-btn">Add Announcement</button>
+        </section>
+
+        <section class="announcement-list-section">
+            <h4>Existing Announcements</h4>
+            <table class="data-table editable-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Published On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="announcements-chief-list-body">
+                    <tr><td colspan="5">No announcements available.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="dashboard-section" id="project-management-section">
+            <h3>Panchayat Projects Management</h3>
+
+            <div class="add-form">
+                <h4>Add New Project</h4>
+                <input type="text" id="new-project-name" placeholder="Project Name" required>
+                <select id="new-project-category" required>
+                    <option value="">Select Category</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Education">Education</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Sanitation">Sanitation</option>
+                    <option value="Livelihood">Livelihood</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="number" id="new-project-budget" placeholder="Budget Allocated (₹)" step="1" required>
+                <input type="date" id="new-project-start-date" required>
+                <input type="date" id="new-project-end-date" required>
+                <textarea id="new-project-description" placeholder="Project Description" rows="2"></textarea>
+                <button id="add-project-btn" class="btn btn-primary">Add Project</button>
+            </div>
+
+            <div class="table-responsive">
+                <h4>All Panchayat Projects</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Project Name</th>
+                            <th>Category</th>
+                            <th>Budget (₹)</th>
+                            <th>Spent (₹)</th>
+                            <th>Progress (%)</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="editable-project-list-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="admin-link">
+                <a href="admin.html" class="btn">Admin Dashboard</a>
+            </div>
+        </section>
+    </main>
+
+    <div id="feedback-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Feedback Details</h3>
+            <p><strong>ID:</strong> <span id="detail-id"></span></p>
+            <p><strong>Name:</strong> <span id="detail-name"></span></p>
+            <p><strong>Contact:</strong> <span id="detail-contact"></span></p>
+            <p><strong>Category:</strong> <span id="detail-category"></span></p>
+            <p><strong>Subject:</strong> <span id="detail-subject"></span></p>
+            <p><strong>Description:</strong> <span id="detail-description"></span></p>
+            <p><strong>Status:</strong> <span id="detail-status"></span></p>
+            <p><strong>Reply:</strong> <span id="detail-reply"></span></p>
+
+            <div class="form-group">
+                <label for="reply-textarea">Your Reply:</label>
+                <textarea id="reply-textarea" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="status-select">Update Status:</label>
+                <select id="status-select">
+                    <option value="New">New</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+            </div>
+            <button class="btn" id="save-feedback-changes">Save Changes</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 GramSeva. All rights reserved.</p>
+        <p>Contact Panchayat: [email protected] | Phone: +91 12345 67890</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

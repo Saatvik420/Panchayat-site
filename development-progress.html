@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchayat Development Progress - GramSeva</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+   <header class="header">
+    <div class="logo-area">
+        <h1 class="logo">GramSeva</h1> <!-- This is the primary text logo, visible everywhere -->
+        
+        <!-- Desktop Hover Menu Dialogue (visible on desktop only, appears on hover over logo-area) -->
+        <div class="desktop-nav-dialogue">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="crop-prices.html">Crop Prices</a></li>
+                <li><a href="fertilizers.html">Fertilizers & More</a></li>
+                <li><a href="feedback.html">Raise an Issue</a></li>
+                <li><a href="development-progress.html" class="active">Development Progress</a></li>
+                <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="mobile-nav-container">
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="ri-menu-line"></i> <!-- This is the Hamburger menu icon, visible on mobile only -->
+        </button>
+        <!-- Mobile-specific navigation list (slides out from side) -->
+        <ul class="mobile-nav-list">
+             <li><a href="index.html">Home</a></li>
+            <li><a href="crop-prices.html">Crop Prices</a></li>
+            <li><a href="fertilizers.html">Fertilizers & More</a></li>
+            <li><a href="feedback.html">Raise an Issue</a></li>
+            <li><a href="development-progress.html" class="active">Development Progress</a></li>
+            <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="container">
+        <section class="page-header">
+            <h2>Panchayat Development Progress & Analytics</h2>
+            <p>Transparency and progress at a glance for the village and government.</p>
+        </section>
+
+        <section class="chart-summary-section">
+            <h3 class="chart-toggle-header">Overall Progress Summary <span class="toggle-icon">▼</span></h3>
+            <div class="chart-content chart-grid hidden"> <!-- Initially hidden, will be a grid -->
+                <div class="chart-container">
+                    <canvas id="projectStatusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="budgetAllocationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="chart-summary-section">
+            <h3 class="chart-toggle-header">Progress by Category <span class="toggle-icon">▼</span></h3>
+            <div class="chart-content chart-grid hidden"> <!-- Initially hidden, will be a grid -->
+                <div class="chart-container">
+                    <canvas id="categoryProgressChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-details">
+            <h3>Detailed Project List</h3>
+            <div class="search-bar">
+                <input type="text" id="project-search" placeholder="Search projects...">
+            </div>
+            <div class="table-responsive">
+                <table class="data-table project-table"> <!-- Added .project-table class for specificity -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Project Name</th>
+                            <th>Budget Allocated (₹)</th>
+                            <th>Money Spent (₹)</th>
+                            <th>Progress (%)</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>Expected End Date</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project-list-body">
+                        <!-- Project data will be loaded here by JavaScript -->
+                        <tr><td colspan="10">Loading project data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 GramSeva. All rights reserved.</p>
+        <p>Contact Panchayat: example@gramseva.com | Phone: +91 12345 67890</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1399 @@
+/* General Styling & Variables */
+:root {
+    /* Define a modern, harmonious color palette */
+    --primary-green: #388E3C;   /* A deeper, earthy green for primary actions/branding */
+    --light-green: #66BB6A;    /* A vibrant, friendly green for accents/secondary elements */
+    --accent-blue: #2196F3;    /* A bright, trustworthy blue for interactive elements */
+    --text-dark: #333333;      /* Dark grey for primary text, good readability */
+    --text-light: #616161;     /* Lighter grey for secondary text/descriptions */
+    --background-light: #F8F9FA; /* Off-white for general background */
+    --background-card: #FFFFFF; /* Pure white for card backgrounds */
+    --border-light: #E0E0E0;   /* Light grey for subtle borders */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* More pronounced shadow for interactive elements */
+    --hover-fade: rgba(255, 255, 255, 0.1); /* White transparency for hover effects */
+    --error-red: #D32F2F;      /* Red for error messages or destructive actions */
+    --info-blue: #BBDEFB;      /* Light blue for info messages/highlights */
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Modern, readable font */
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6; /* Improved line-height for readability */
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto; /* Generous vertical margin */
+    padding: 0 25px; /* Consistent horizontal padding */
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700; /* Bold headings */
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 0.8em;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+h4 { font-size: 1.4em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1565C0; /* Darker blue on hover */
+}
+
+/* Hidden content for JS-controlled visibility (e.g., Panchayat Chief dashboard pre-auth) */
+.hidden-content {
+    display: none !important;
+}
+
+/* Header & Navigation */
+.header {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between; /* Keeps logo and toggle spaced */
+    align-items: center;
+    box-shadow: 0 4px 15px var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    position: relative; /* For positioning the desktop-nav-dialogue */
+    z-index: 100; /* Ensure logo area is above content */
+    flex-grow: 1; /* Allows logo to take up available space */
+    justify-content: center; /* Center the logo within its flex container */
+    padding: 0 20px; /* Add internal padding to logo area */
+}
+
+/* Text Logo - Always visible, adjust size by media query */
+.logo {
+    margin: 0;
+    font-size: 2.2em; /* Default for desktop */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: font-size 0.3s ease;
+    text-align: center; /* Ensure text itself is centered within its element */
+}
+
+/* Desktop Hover Menu Dialogue (Hidden by default, appears on logo-area hover) */
+.desktop-nav-dialogue {
+    position: absolute;
+    top: 100%; /* Position right below the header */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px); /* Adjust transform to center and slightly offset */
+    min-width: 250px;
+    background-color: var(--background-card);
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    padding: 15px 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    z-index: 99;
+    border: 1px solid var(--border-light);
+}
+
+.logo-area:hover .desktop-nav-dialogue {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Slide up to final position */
+}
+
+.desktop-nav-dialogue .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.desktop-nav-dialogue .nav-list li a {
+    display: block;
+    padding: 12px 25px; /* Generous padding for clean look */
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent items from wrapping */
+}
+
+.desktop-nav-dialogue .nav-list li a:hover,
+.desktop-nav-dialogue .nav-list li a.active {
+    background-color: var(--info-blue);
+    color: var(--primary-green);
+    border-left: 4px solid var(--primary-green);
+    padding-left: 21px; /* Adjust padding due to border (25px - 4px) */
+}
+
+/* Mobile Navigation Container (Hamburger Menu) */
+.mobile-nav-container {
+    display: flex; /* Default: hide menu-toggle and mobile-nav-list on desktop */
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none; /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    font-size: 2em; /* Large enough for touch */
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    z-index: 1001; /* Ensure it's above menu on mobile */
+}
+
+.menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+.mobile-nav-list {
+    display: none; /* Hidden by default on desktop */
+}
+
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    background-color: #1976D2; /* Darker blue */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background-color: var(--light-green);
+    margin-left: 15px; /* Standard spacing for secondary button */
+}
+
+.btn-secondary:hover {
+    background-color: #388E3C; /* Darker green */
+}
+
+.btn-sm {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border-radius: 6px;
+}
+
+/* Section & Card Styling */
+section {
+    background-color: var(--background-card);
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-light); /* Subtle border for definition */
+}
+
+section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid var(--border-light);
+    background-color: transparent; /* Override section background */
+    box-shadow: none; /* Override section shadow */
+    border-radius: 0; /* Override section border-radius */
+    border: none;
+    padding: 0;
+    margin-top: 0; /* Ensure no extra top margin from section */
+}
+
+.page-header h2 {
+    color: var(--primary-green);
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.page-header p {
+    color: var(--text-light);
+    font-size: 1.1em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hero Section (Homepage) */
+.hero-section {
+    text-align: center;
+    padding: 70px 30px;
+    background: linear-gradient(135deg, var(--light-green) 0%, #A5D6A7 100%);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23FFFFFF" fill-opacity="0.1"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm12 10V6h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-12 12V22h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-12 12v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 24v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-12 6v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm24 6v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z" fill-opacity="0.1" /></g></g></svg>');
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.hero-section h2 {
+    color: white;
+    font-size: 3.2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    color: #f0f0f0;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    font-weight: 300;
+}
+
+.hero-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Homepage Specifics */
+.info-section h3 {
+    color: var(--primary-green);
+    border-bottom: 2px solid var(--border-light);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.crop-snapshot {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.crop-item {
+    background-color: #E8F5E9; /* Lighter green background */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #DCE7D8;
+}
+
+.crop-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.crop-item h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--primary-green);
+    font-size: 1.2em;
+}
+
+.crop-item p {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.crop-item .trend {
+    font-size: 0.9em;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+.announcements {
+    list-style: none;
+    padding-left: 0;
+}
+
+.announcements li {
+    background-color: #fcfcfc; /* Subtle white background for each item */
+    border-left: 5px solid var(--light-green);
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    transition: background-color 0.3s ease;
+}
+
+.announcements li:hover {
+    background-color: #eaf1da;
+}
+
+.announcements li p {
+    margin: 0;
+    color: var(--text-light);
+}
+
+.announcements li strong {
+    color: var(--primary-green);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Forms (General Styling) */
+.form-card {
+    background-color: var(--background-card);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    border: 1px solid var(--border-light);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FAFAFA; /* Slightly off-white input background */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+    background-color: white;
+}
+
+.required {
+    color: var(--error-red);
+    font-weight: 700;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 18px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FAFAFA;
+}
+
+.search-bar input:focus {
+    border-color: var(--primary-green);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.1);
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto; /* Allow horizontal scrolling for tables on small screens */
+    margin-top: 25px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate; /* For rounded corners */
+    border-spacing: 0;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    border-radius: 10px;
+    overflow: hidden; /* Ensures rounded corners are applied */
+    background-color: var(--background-card);
+}
+
+.data-table th,
+.data-table td {
+    border-bottom: 1px solid var(--border-light);
+    padding: 15px 20px;
+    text-align: left;
+    vertical-align: middle; /* Align content vertically */
+}
+
+.data-table th {
+    background-color: var(--primary-green);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    white-space: nowrap; /* Prevent headers from wrapping too much */
+}
+
+/* Rounded corners for table header */
+.data-table thead th:first-child { border-top-left-radius: 10px; }
+.data-table thead th:last-child { border-top-right-radius: 10px; }
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #F8FBF8; /* Light stripe for readability */
+}
+
+.data-table tbody tr:hover {
+    background-color: #E3F2FD; /* Light blue on hover */
+    cursor: pointer;
+}
+
+/* Remove bottom border on last row for cleaner look */
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table .actions-cell {
+    white-space: nowrap; /* Keep buttons on one line */
+    text-align: center;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: capitalize;
+    min-width: 90px; /* Ensure consistent width for badges */
+    text-align: center;
+}
+
+.status-badge.New { background-color: #E3F2FD; color: #1976D2; } /* Light Blue */
+.status-badge.Planned { background-color: #FFFDE7; color: #FFC107; } /* Light Yellow */
+.status-badge.Resolved, .status-badge.Completed { background-color: #E8F5E9; color: #388E3C; } /* Light Green */
+.status-badge.In-Progress, .status-badge.In-progress { background-color: #BBDEFB; color: #2196F3; } /* Mid Blue */
+.status-badge.Delayed { background-color: #FFEBEE; color: #D32F2F; } /* Light Red */
+.status-badge.On-Hold { background-color: #CFD8DC; color: #607D8B; } /* Light Grey */
+
+/* Panchayat Dashboard Specifics */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.dashboard-cards .card {
+    background-color: var(--background-card);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Flexbox for internal alignment */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-cards .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.dashboard-cards .card h3 {
+    color: var(--primary-green);
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.dashboard-cards .card p {
+    font-size: 2.8em; /* Larger number */
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin: 10px 0 0 0;
+    line-height: 1; /* Tighter line height for numbers */
+}
+
+/* Section Dividers */
+.section-divider {
+    text-align: center;
+    margin: 50px 0 35px 0;
+    border-bottom: 2px solid var(--border-light);
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.section-divider h3 {
+    color: var(--primary-green);
+    font-size: 2em;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+    background-color: var(--background-light); /* Background to "cut" the line */
+    z-index: 1; /* Ensure text is above the line */
+}
+
+/* Horizontal lines for section dividers */
+.section-divider h3::before,
+.section-divider h3::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px; /* Length of the lines */
+    height: 1px;
+    background-color: var(--border-light);
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.section-divider h3::before {
+    left: -120px; /* Position to the left */
+}
+
+.section-divider h3::after {
+    right: -120px; /* Position to the right */
+}
+
+/* Editable Tables (Panchayat Chief) */
+.editable-table td input,
+.editable-table td select,
+.editable-table td textarea {
+    width: 100%; /* Take full width of cell */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+    background-color: #FDFDFD;
+}
+
+.editable-table td textarea {
+    resize: vertical;
+    min-height: 40px; /* Smaller default height for tables */
+}
+
+/* Specific widths for inputs in editable tables for better layout */
+.editable-table .edit-project-name { min-width: 150px; }
+.editable-table .edit-project-category, .editable-table .edit-status { min-width: 120px; }
+.editable-table .edit-project-budget, .editable-table .edit-money-spent, .editable-table .edit-progress { min-width: 90px; }
+.editable-table .edit-start-date, .editable-table .edit-end-date { min-width: 140px; }
+.editable-table .edit-announcement-title { min-width: 180px; }
+.editable-table .edit-announcement-content { min-width: 250px; }
+.editable-table .edit-price { min-width: 80px; }
+.editable-table .edit-unit { min-width: 100px; }
+
+
+/* Add New Item Forms (Panchayat Chief) */
+.add-new-item-form {
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #E8F5E9; /* Light green background */
+    border: 1px dashed var(--light-green); /* Dashed border */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.add-new-item-form h4 {
+    color: var(--primary-green);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.add-new-item-form .form-group {
+    margin-bottom: 15px;
+}
+
+.add-new-item-form .form-group label {
+    font-weight: 500;
+}
+
+/* Submit button for add forms */
+.add-new-item-form .btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 1.1em;
+}
+
+
+/* Development Progress Page Specifics (Charts) */
+.chart-summary-section {
+    padding: 30px;
+    margin-bottom: 25px;
+    background-color: var(--background-card);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-light);
+}
+
+.chart-toggle-header {
+    color: var(--primary-green);
+    font-size: 1.8em;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-light);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.chart-toggle-header:hover {
+    color: var(--accent-blue);
+}
+
+.toggle-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.chart-content {
+    padding-top: 20px;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding-top 0.5s ease-out;
+    overflow: hidden;
+    max-height: 1000px; /* Arbitrary large value for smooth expansion */
+    opacity: 1;
+}
+
+.chart-content.hidden {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min-width for better fit */
+    gap: 25px;
+}
+
+.chart-container {
+    background-color: #fcfcfc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.03);
+    border: 1px solid #F0F0F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px; /* Fixed height for charts for consistency */
+}
+
+.chart-container canvas {
+    max-width: 100%;
+    max-height: 100%; /* Ensure canvas respects container height */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Modal for Feedback Details */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    padding-top: 50px; /* Keep modal slightly off top for better view */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: var(--background-card);
+    margin: 5% auto; /* Centered with a bit more top margin */
+    padding: 35px;
+    border: none;
+    width: 90%;
+    max-width: 700px; /* Slightly smaller max-width */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    position: relative;
+    animation: slideInTop 0.4s ease-out;
+}
+
+.modal-content h3 {
+    color: var(--primary-green);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.modal-content strong {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+.close-button {
+    color: #888;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 32px;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--error-red); /* Red close button on hover */
+    text-decoration: none;
+    cursor: pointer;
+    transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInTop {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    background-color: #EBF2F6; /* Light grey/blue for footer */
+    color: var(--text-light);
+    border-top: 1px solid #D1D1D1;
+    font-size: 0.9em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05); /* Shadow for footer */
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+/* --- Responsive Design --- */
+
+/* Mobile & Tablet (up to 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    /* Header adjustments for mobile */
+    .header {
+        flex-direction: row; /* Keep logo and toggle on one row */
+        align-items: center;
+        padding: 10px 15px;
+        position: relative;
+    }
+
+    .logo-area {
+        flex-grow: 1; /* Allows logo to take available space */
+        justify-content: center; /* **Center the logo text on mobile** */
+        padding: 0; /* Remove horizontal padding from logo area */
+    }
+    .logo { /* Text logo visible on mobile, ensure proper size */
+        font-size: 1.8em; /* Slightly smaller for mobile screens */
+    }
+    
+    /* Hide desktop hover menu on mobile */
+    .desktop-nav-dialogue {
+        display: none;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-nav-container {
+        display: flex; /* Show the container for mobile */
+        align-items: center;
+    }
+    .menu-toggle {
+        display: block; /* Show hamburger menu button on mobile */
+        font-size: 2em; /* Ensure it's clearly visible */
+    }
+
+    /* Mobile Navigation Menu (Sliding from left) */
+    .mobile-nav-list {
+        display: flex; /* Show flex for vertical stacking */
+        flex-direction: column;
+        width: 70%; /* Occupy 70% of screen width */
+        max-width: 300px; /* Limit max width for larger phones */
+        text-align: left;
+        background-color: var(--primary-green);
+        position: fixed; /* Fixed position relative to viewport */
+        top: 0;
+        left: 0;
+        height: 100%; /* Full height */
+        transform: translateX(-100%); /* Start hidden off-screen */
+        transition: transform 0.3s ease-in-out;
+        padding: 80px 0 20px; /* Padding for top (below header) and bottom */
+        box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+        z-index: 999; /* Ensure it's above everything else */
+        overflow-y: auto; /* Allow scrolling if many items */
+    }
+
+    /* State when mobile menu is open (controlled by JS) */
+    .mobile-nav-container.open .mobile-nav-list {
+        transform: translateX(0); /* Slide in */
+    }
+
+    .mobile-nav-list li {
+        margin: 0; /* Remove horizontal margin */
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* Separator for clarity */
+    }
+    .mobile-nav-list li:last-child {
+        border-bottom: none;
+    }
+    .mobile-nav-list li a {
+        padding: 15px 20px; /* Generous padding for touch targets */
+        display: block;
+        color: white; /* White text for mobile menu */
+        font-weight: 500;
+    }
+    .mobile-nav-list li a:hover,
+    .mobile-nav-list li a.active {
+        background-color: rgba(255, 255, 255, 0.25);
+        color: white; /* Keep white on hover */
+    }
+
+    /* Overlay for when mobile menu is open */
+    .mobile-nav-container.open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Dark overlay */
+        z-index: 998; /* Below menu, above content */
+    }
+
+
+    /* General sections */
+    section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .page-header h2 {
+        font-size: 2em;
+    }
+
+    /* Hero section */
+    .hero-section {
+        padding: 40px 15px;
+        margin-bottom: 30px;
+    }
+    .hero-section h2 {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+    .hero-section p {
+        font-size: 1em;
+        margin-bottom: 25px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn, .btn-secondary {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    /* Crop snapshot */
+    .crop-snapshot {
+        grid-template-columns: 1fr;
+    }
+
+    /* Forms */
+    .form-group label {
+        font-size: 0.9em;
+    }
+    .form-group input, .form-group textarea, .form-group select, .search-bar input {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+    .add-new-item-form h4 {
+        font-size: 1.2em;
+    }
+
+    /* Tables (Mobile-first responsive table pattern) */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .data-table,
+    .data-table thead,
+    .data-table tbody,
+    .data-table th,
+    .data-table td,
+    .data-table tr {
+        display: block;
+    }
+
+    .data-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .data-table tr {
+        border: 1px solid var(--border-light);
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        padding: 10px;
+    }
+
+    .data-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .data-table td:last-child {
+        border-bottom: none;
+    }
+
+    .data-table td::before {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: var(--primary-green);
+        font-size: 0.85em;
+    }
+
+    /* Mobile table labels for various tables - Highly Specific */
+    /* Feedback Table (for feedback.html and panchayat-chief.html) */
+    .data-table td:nth-child(1)::before { content: "ID:"; }
+    .data-table td:nth-child(2)::before { content: "Name/Subject:"; } /* Handles both name (chief) and subject (user) */
+    .data-table td:nth-child(3)::before { content: "Category:"; }
+    .data-table td:nth-child(4)::before { content: "Status:"; }
+    .data-table td:nth-child(5)::before { content: "Submitted On:"; }
+    .data-table td:nth-child(6)::before { content: "Reply/Content:"; } /* Handles reply and announcement content */
+    .data-table td:nth-child(7)::before { content: "Actions:"; }
+
+    /* Crop Prices Table (Public & Chief) */
+    .data-table.crop-table td:nth-child(1)::before { content: "Crop Name:"; }
+    .data-table.crop-table td:nth-child(2)::before { content: "Price/Unit:"; }
+    .data-table.crop-table td:nth-child(3)::before { content: "Trend:"; }
+    .data-table.crop-table td:nth-child(4)::before { content: "Last Updated:"; }
+    .data-table.crop-table td:nth-child(5)::before { content: "Actions:"; } /* For editable crops */
+
+    /* Fertilizer Prices Table (Public & Chief) */
+    .data-table.fertilizer-table td:nth-child(1)::before { content: "Product Name:"; }
+    .data-table.fertilizer-table td:nth-child(2)::before { content: "Unit:"; }
+    .data-table.fertilizer-table td:nth-child(3)::before { content: "Price:"; }
+    .data-table.fertilizer-table td:nth-child(4)::before { content: "Last Updated:"; }
+    .data-table.fertilizer-table td:nth-child(5)::before { content: "Actions:"; } /* For editable fertilizers */
+
+    /* Announcement Table (Chief) */
+    .data-table.announcement-table td:nth-child(1)::before { content: "ID:"; }
+    .data-table.announcement-table td:nth-child(2)::before { content: "Title:"; }
+    .data-table.announcement-table td:nth-child(3)::before { content: "Content:"; }
+    .data-table.announcement-table td:nth-child(4)::before { content: "Published On:"; }
+    .data-table.announcement-table td:nth-child(5)::before { content: "Actions:"; }
+
+    /* Project Table (Public & Chief) */
+    .data-table.project-table td:nth-child(1)::before { content: "ID:"; }
+    .data-table.project-table td:nth-child(2)::before { content: "Category:"; }
+    .data-table.project-table td:nth-child(3)::before { content: "Project Name:"; }
+    .data-table.project-table td:nth-child(4)::before { content: "Budget:"; }
+    .data-table.project-table td:nth-child(5)::before { content: "Spent:"; }
+    .data-table.project-table td:nth-child(6)::before { content: "Progress (%):"; }
+    .data-table.project-table td:nth-child(7)::before { content: "Status:"; }
+    .data-table.project-table td:nth-child(8)::before { content: "Start Date:"; }
+    .data-table.project-table td:nth-child(9)::before { content: "End Date:"; }
+    .data-table.project-table td:nth-child(10)::before { content: "Description:"; }
+    .data-table.project-table td:nth-child(11)::before { content: "Actions:"; } /* For editable projects */
+
+
+    /* Adjust padding for cells with buttons on mobile */
+    .data-table td.actions-cell {
+        text-align: center;
+        padding-left: 10px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-bottom: none;
+    }
+    .data-table td.actions-cell::before {
+        content: none;
+    }
+    .data-table td .btn-sm {
+        margin: 5px;
+        width: auto;
+        flex-grow: 1;
+        max-width: 120px;
+    }
+    .editable-table td input, .editable-table td select, .editable-table td textarea {
+        width: 100%;
+        min-width: unset;
+        max-width: none;
+    }
+
+
+    /* Charts */
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+    .chart-container {
+        height: 300px;
+    }
+
+    /* Modals */
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        padding: 25px;
+    }
+    .modal-content h3 {
+        font-size: 1.6em;
+    }
+    .close-button {
+        font-size: 28px;
+        top: 10px;
+        right: 15px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 15px;
+        margin-top: 25px;
+    }
+}
+
+/* Tablets (769px to 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    .container {
+        padding: 0 25px;
+    }
+    /* Header & Navigation */
+    .header {
+        padding: 15px 20px;
+    }
+    .logo-area {
+        justify-content: center; /* Center logo on tablets */
+        padding: 0 10px;
+    }
+    .logo {
+        font-size: 2em; /* Adjusted size for tablets */
+    }
+    /* Show desktop nav dialogue */
+    .desktop-nav-dialogue {
+        display: block;
+    }
+    .mobile-nav-container { /* Hide mobile nav container */
+        display: none;
+    }
+
+    /* Hero */
+    .hero-section h2 {
+        font-size: 3em;
+    }
+
+    /* Dashboard Cards */
+    .dashboard-cards {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+    }
+
+    /* Charts */
+    .chart-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    /* Editable tables */
+    .editable-table td input, .editable-table td select, .editable-table td textarea {
+        min-width: unset;
+        max-width: 100%;
+    }
+}
+
+/* Desktop (993px and up) - Base styles apply */
+@media (min-width: 993px) {
+    .header {
+        padding: 15px 30px;
+    }
+    .logo-area {
+        justify-content: center; /* Center logo on desktop */
+        padding: 0 20px;
+    }
+    .logo {
+        font-size: 2.2em; /* Default desktop size */
+    }
+    /* Show desktop nav dialogue */
+    .desktop-nav-dialogue {
+        display: block;
+    }
+    .mobile-nav-container { /* Hide mobile nav container */
+        display: none;
+    }
+}
+/* Add a basic fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply to main sections, for example */
+.hero-section,
+.info-section,
+.price-list-section,
+.product-list-section,
+.feedback-form-section,
+.user-feedback-status-section,
+.development-summary-section,
+.project-list-section {
+    opacity: 0; /* Start invisible */
+    animation: fadeIn 0.8s ease-out forwards; /* Apply animation */
+    /* You might need to add animation-delay for sequential appearance if desired */
+}
+
+/* To avoid all animations playing at once, you'd typically trigger these with JavaScript
+   as elements enter the viewport (Intersection Observer API is great for this).
+   For a simpler, immediate load animation, you can use animation-delay: */
+.hero-section { animation-delay: 0.2s; }
+.info-section:nth-of-type(1) { animation-delay: 0.4s; } /* Quick Look: Today's Top Crop Prices */
+.info-section:nth-of-type(2) { animation-delay: 0.6s; } /* Latest Announcements from Panchayat */
+/* Adjust delays for other sections on other pages accordingly */
+
+.btn {
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus { /* Focus for keyboard navigation accessibility */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: var(--shadow-medium); /* More prominent shadow */
+    /* For primary buttons, maybe a slightly darker green */
+    background-color: #2e7d32; /* Example: slightly darker primary green */
+}
+
+.btn:active { /* For tap effect on mobile */
+    transform: translateY(0); /* Press down effect */
+    box-shadow: var(--shadow-light); /* Lighter shadow on press */
+    background-color: #1b5e20; /* Even darker on press */
+}
+
+.btn-secondary {
+    /* Define secondary button specific styles */
+    background-color: var(--background-card);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: var(--primary-green);
+    color: var(--background-card);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-secondary:active {
+    background-color: #2e7d32;
+    color: var(--background-card);
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+}
+
+/* For desktop hover menu links */
+.nav-list a {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+    color: var(--accent-blue); /* Change color on hover */
+    transform: translateX(3px); /* Slight slide effect */
+}
+
+/* For mobile navigation links (already covered in previous response, but reiterating) */
+.mobile-nav-list a {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-nav-list a:hover,
+.mobile-nav-list a:focus,
+.mobile-nav-list a.active {
+    background-color: var(--light-green);
+    transform: translateX(5px); /* Slide effect on hover/tap */
+}
+
+.dashboard-card, .info-section, .crop-snapshot {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-card:hover, .dashboard-card:focus-within,
+.info-section:hover, .info-section:focus-within,
+.crop-snapshot:hover, .crop-snapshot:focus-within {
+    box-shadow: var(--shadow-medium); /* Lifts the card */
+    transform: translateY(-3px); /* Slight vertical lift */
+}
+
+.menu-toggle {
+    /* ... existing styles ... */
+    transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+.menu-toggle i {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu-toggle.open .ri-menu-line {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.menu-toggle .ri-close-line { /* Assuming you add this icon for the 'X' */
+    position: absolute; /* Overlay the icons */
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.menu-toggle.open .ri-close-line {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Responsive Only Action Buttons - Hidden by default for desktop */
+.responsive-actions {
+    display: none; /* Hide on desktop */
+    text-align: center;
+    padding: 20px 0;
+}
+
+.responsive-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 15px; /* Space between buttons */
+    max-width: 300px; /* Limit width for aesthetics on larger phones */
+    margin: 0 auto; /* Center the button container */
+    padding: 0 20px; /* Add some side padding */
+}
+
+.btn-responsive-action {
+    width: 100%; /* Make buttons full width in their container */
+    padding: 12px 20px;
+    font-size: 1.1em;
+    text-align: center;
+    border-radius: 8px; /* Slightly more rounded */
+}
+
+/* Media query for mobile view (e.g., max-width: 768px) */
+@media (max-width: 768px) {
+    .responsive-actions {
+        display: block; /* Show on mobile */
+    }
+
+    /* You might want to hide these if they already exist in your mobile nav */
+    /* For example, if "Development Progress" and "Panchayat Login" are already in your hamburger menu */
+    /* If they are, consider whether you want duplication or if these buttons serve a quick-access purpose */
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GramSeva - Your Village Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+    <div class="logo-area">
+        <h1 class="logo">GramSeva</h1> <!-- This is the primary text logo, visible everywhere -->
+        
+        <!-- Desktop Hover Menu Dialogue (visible on desktop only, appears on hover over logo-area) -->
+        <div class="desktop-nav-dialogue">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="crop-prices.html">Crop Prices</a></li>
+                <li><a href="fertilizers.html">Fertilizers & More</a></li>
+                <li><a href="feedback.html">Raise an Issue</a></li>
+                <li><a href="development-progress.html" class="active">Development Progress</a></li>
+                <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="mobile-nav-container">
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="ri-menu-line"></i> <!-- This is the Hamburger menu icon, visible on mobile only -->
+        </button>
+        <!-- Mobile-specific navigation list (slides out from side) -->
+        <ul class="mobile-nav-list">
+             <li><a href="index.html">Home</a></li>
+            <li><a href="crop-prices.html">Crop Prices</a></li>
+            <li><a href="fertilizers.html">Fertilizers & More</a></li>
+            <li><a href="feedback.html">Raise an Issue</a></li>
+            <li><a href="development-progress.html" class="active">Development Progress</a></li>
+            <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="container">
+        <section class="hero-section">
+            <h2>Welcome to GramSeva - Your Digital Village Portal</h2>
+            <p>Empowering our village with easy access to information and services.</p>
+            <div class="hero-buttons">
+                <a href="feedback.html" class="btn">Raise a Request</a>
+                <a href="crop-prices.html" class="btn btn-secondary">Check Crop Prices</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h3>Quick Look: Today's Top Crop Prices</h3>
+            <div class="crop-snapshot" id="crop-snapshot">
+                <p>Loading latest prices...</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h3>Latest Announcements from Panchayat</h3>
+            <ul class="announcements" id="announcements-list">
+                <p>No announcements available yet. Please check back later.</p>
+            </ul>
+        </section>
+
+        <section class="responsive-actions">
+            <div class="responsive-buttons">
+                <a href="development-progress.html" class="btn btn-responsive-action">View Development Progress</a>
+                <a href="panchayat-chief.html" class="btn btn-secondary btn-responsive-action">Panchayat Login</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 GramSeva. All rights reserved.</p>
+        <p>Contact Panchayat: [email protected] | Phone: +91 12345 67890</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

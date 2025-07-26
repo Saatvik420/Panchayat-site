@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizers & Ingredients - GramSeva</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+    <div class="logo-area">
+        <h1 class="logo">GramSeva</h1> <!-- This is the primary text logo, visible everywhere -->
+        
+        <!-- Desktop Hover Menu Dialogue (visible on desktop only, appears on hover over logo-area) -->
+        <div class="desktop-nav-dialogue">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="crop-prices.html">Crop Prices</a></li>
+                <li><a href="fertilizers.html">Fertilizers & More</a></li>
+                <li><a href="feedback.html">Raise an Issue</a></li>
+                <li><a href="development-progress.html" class="active">Development Progress</a></li>
+                <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="mobile-nav-container">
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="ri-menu-line"></i> <!-- This is the Hamburger menu icon, visible on mobile only -->
+        </button>
+        <!-- Mobile-specific navigation list (slides out from side) -->
+        <ul class="mobile-nav-list">
+             <li><a href="index.html">Home</a></li>
+            <li><a href="crop-prices.html">Crop Prices</a></li>
+            <li><a href="fertilizers.html">Fertilizers & More</a></li>
+            <li><a href="feedback.html">Raise an Issue</a></li>
+            <li><a href="development-progress.html" class="active">Development Progress</a></li>
+            <li><a href="panchayat-chief.html">Panchayat Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="container">
+        <section class="page-header">
+            <h2>Fertilizers, Seeds & Agricultural Ingredients</h2>
+            <p>Find the latest prices for essential farming inputs.</p>
+        </section>
+
+        <section class="product-list-section">
+            <input type="text" id="fertilizer-search" placeholder="Search for a product..." class="search-bar">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody id="fertilizer-prices-body">
+                    <tr><td colspan="4">Loading product data...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="info-section">
+            <h3>Important Information</h3>
+            <p>Prices are indicative and may vary by supplier and market. Please verify with local vendors before purchase.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 GramSeva. All rights reserved.</p>
+        <p>Contact Panchayat: [email protected] | Phone: +91 12345 67890</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
